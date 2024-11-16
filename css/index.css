@@ -1,0 +1,140 @@
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom right, #f0f0f0, #e6e6e6);
+    color: #333;
+}
+
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #003366;
+    padding: 10px 20px;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-logo img {
+    width: 100px;
+    height: auto;
+}
+
+.animated-heading {
+    font-size: 24px;
+    font-weight: bold;
+    animation: slideIn 3s infinite alternate;
+}
+
+/* Slide-in animation */
+@keyframes slideIn {
+    0% {
+        letter-spacing: 2px;
+    }
+    100% {
+        letter-spacing: 10px;
+    }
+}
+
+/* Login Container */
+.login-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    margin-top: 20px;
+}
+
+
+/* Style for the logo container */
+.logo-container {
+    margin-top: -370px;
+    position:absolute;
+    display: flex;
+    justify-content: center;
+}
+
+/* Style for the logo image */
+.logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #fbbd08; /* Add a border color matching the design */
+    object-fit: cover;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
+
+
+.logo-background {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+.logo-background img {
+    width: 500px;
+    height: auto;
+}
+
+.login-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    color: #003366;
+}
+
+.login-form label {
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.login-btn {
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #00509e;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    background-color: #003366;
+    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

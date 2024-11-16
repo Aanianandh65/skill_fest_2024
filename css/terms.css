@@ -1,0 +1,103 @@
+/* General styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main container styling */
+.terms-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px 30px;
+    text-align: center;
+}
+
+/* Skill Fest logo in a circle */
+.logo-container {
+    margin-top: -60px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #fbbd08; /* Add a border color matching the design */
+    object-fit: cover;
+    background: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Page heading styling */
+.page-heading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #003366; /* Navy blue */
+    margin: 15px 0;
+}
+
+/* Subheading for student welcome */
+#student-id {
+    font-weight: bold;
+    color: #fbbd08; /* Yellow */
+}
+
+/* Terms heading */
+h2 {
+    font-size: 20px;
+    color: #444;
+    margin-bottom: 15px;
+}
+
+/* List of terms */
+.terms-list {
+    text-align: left;
+    padding: 0 10px;
+    margin: 15px 0;
+    line-height: 1.6;
+    color: #555;
+}
+
+.terms-list li {
+    margin-bottom: 10px;
+}
+
+/* Start button */
+.start-btn {
+    background-color: #fbbd08; /* Yellow */
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+    background-color: #ffa500; /* Darker yellow for hover effect */
+    transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .terms-container {
+        padding: 15px;
+    }
+
+    .page-heading {
+        font-size: 20px;
+    }
+
+    .start-btn {
+        width: 100%;
+    }
+}
