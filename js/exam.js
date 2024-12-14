@@ -4,6 +4,15 @@ document.addEventListener("DOMContentLoaded", function () {
     startTimer(); // Optionally, start the timer here
 });
 
+
+
+let currentQuestion = 0;
+let score = 0;
+let timeLeft = 30 * 60; // 30 minutes in seconds
+
+const questionTitle = document.getElementById("question-title");
+const questionText = document.getElementById("question-text");
+
 const questions = [
     {
         text: "Who was the first Chief Minister of Kerala?",
@@ -212,12 +221,6 @@ const questions = [
     // Add more questions here
 ];
 
-let currentQuestion = 0;
-let score = 0;
-let timeLeft = 30 * 60; // 30 minutes in seconds
-
-const questionTitle = document.getElementById("question-title");
-const questionText = document.getElementById("question-text");
 const optionsForm = document.getElementById("options-form");
 const progressBar = document.getElementById("progress-bar");
 const timerElement = document.getElementById("timer");
@@ -301,18 +304,16 @@ function startTimer() {
 }
 
 // Finish the exam
+// Function to handle when the exam is finished
 function finishExam() {
-    // Store the student's score and username in sessionStorage for admin purposes
-    const username = sessionStorage.getItem("currentStudent"); // Assuming the username was set during login
-    const studentScore = { username: username, score: score };
+    // Store the student's score in localStorage
+    const studentScores = JSON.parse(localStorage.getItem("studentScores")) || []; // Get existing scores or an empty array
 
-    // Retrieve existing scores from localStorage
-    const existingScores = JSON.parse(localStorage.getItem("studentScores")) || [];
-    existingScores.push(studentScore);
+    // Store the student's score in localStorage
+    studentScores.push({ username: studentName, score: score });
+    localStorage.setItem("studentScores", JSON.stringify(studentScores));
 
-    // Save updated scores back to localStorage
-    localStorage.setItem("studentScores", JSON.stringify(existingScores));
-
-    // Redirect to the thank-you page
-    window.location.href = "thankyou.html";
+    // Optionally, show the score to the student or redirect to another page
+    alert(`Exam Finished!`);
+    window.location.href = "thank-you.html";  // Redirect to a thank-you page or results page
 }
