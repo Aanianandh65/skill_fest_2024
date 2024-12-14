@@ -9,97 +9,94 @@ document.getElementById("register-form").addEventListener("submit", function (e)
     const phone = document.getElementById("phone").value;
     const email = document.getElementById("email").value;
     const college = document.getElementById("college").value;
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
 
-    // Create a new student object
-    const student = {
-        name: name,
-        phone: phone,
-        email: email,
-        college: college,
-        username: username,
-        password: password
-    };
-
-    // Add student to localStorage
-    registerStudent(student);
-
-    // Update the student table
-    updateStudentTable();
-
-    // Clear form fields
-    document.getElementById("register-form").reset();
-    alert("Student registered successfully!");
-});
-
-// Function to register a student into localStorage
-function registerStudent(student) {
-    // Retrieve existing students from localStorage or initialize empty array
-    const students = JSON.parse(localStorage.getItem("registeredStudents")) || [];
-
-    // Check if the username already exists
-    if (students.some((s) => s.username === student.username)) {
-        alert("Username already exists! Please choose a different username.");
+    if (!name || !phone || !email || !college) {
+        alert("Please fill in all fields!");
         return;
     }
 
-    // Add the new student to the array
-    students.push(student);
+    // Create a student object
+    const student = { name, phone, email, college };
 
-    // Save updated student list to localStorage
-    localStorage.setItem("registeredStudents", JSON.stringify(students));
-}
+    // Retrieve existing students from localStorage
+    const existingStudents = JSON.parse(localStorage.getItem("students")) || [];
+    existingStudents.push(student);
 
-// Function to update the student table from localStorage
-function updateStudentTable() {
-    const tableBody = document.getElementById("student-table").querySelector("tbody");
-    tableBody.innerHTML = ""; // Clear existing rows
+    // Save updated students list back to localStorage
+    localStorage.setItem("students", JSON.stringify(existingStudents));
 
-    // Retrieve students from localStorage
-    const students = JSON.parse(localStorage.getItem("registeredStudents")) || [];
+    alert("Student registered successfully!");
+    e.target.reset(); // Reset the form
+    displayStudents(); // Refresh the student table
+});
 
-    // Populate table with student data
-    students.forEach((student) => {
+// Display all registered students
+function displayStudents() {
+    const studentTableBody = document.getElementById("student-table-body");
+    const students = JSON.parse(localStorage.getItem("students")) || [];
+
+    studentTableBody.innerHTML = ""; // Clear table content
+
+    students.forEach((student, index) => {
         const row = document.createElement("tr");
 
         row.innerHTML = `
+            <td>${index + 1}</td>
             <td>${student.name}</td>
             <td>${student.phone}</td>
             <td>${student.email}</td>
             <td>${student.college}</td>
-            <td>${student.username}</td>
-            <td>${student.password}</td>
+            <td>
+                <button class="delete-btn" data-index="${index}">Delete</button>
+            </td>
         `;
 
-        tableBody.appendChild(row);
+        studentTableBody.appendChild(row);
+    });
+
+    // Attach delete event listeners to delete buttons
+    document.querySelectorAll(".delete-btn").forEach(button => {
+        button.addEventListener("click", function () {
+            const index = parseInt(this.dataset.index);
+            deleteStudent(index);
+        });
     });
 }
 
-// Redirect to login page
-document.getElementById("go-to-login").addEventListener("click", function () {
-    window.location.href = "index.html"; // Adjust the path as needed for your project structure
-});
+// Delete a student by index
+function deleteStudent(index) {
+    const students = JSON.parse(localStorage.getItem("students")) || [];
+    students.splice(index, 1); // Remove the student from the array
 
-// Load student data when admin panel is loaded
-document.addEventListener("DOMContentLoaded", updateStudentTable);
+    // Save the updated array back to localStorage
+    localStorage.setItem("students", JSON.stringify(students));
 
-// Load and display student scores
-function loadScores() {
-    const scoresTableBody = document.getElementById("scores-table").querySelector("tbody");
+    alert("Student deleted successfully!");
+    displayStudents(); // Refresh the student table
+}
+
+// Display all student scores
+function displayScores() {
+    const scoreTableBody = document.getElementById("score-table-body");
     const scores = JSON.parse(localStorage.getItem("studentScores")) || [];
 
-    scoresTableBody.innerHTML = ""; // Clear previous entries
+    scoreTableBody.innerHTML = ""; // Clear table content
 
-    scores.forEach((score) => {
+    scores.forEach((score, index) => {
         const row = document.createElement("tr");
+
         row.innerHTML = `
-            <td>${score.username}</td>
+            <td>${index + 1}</td>
+            <td>${score.username || "Unknown"}</td>
             <td>${score.score}</td>
         `;
-        scoresTableBody.appendChild(row);
+
+        scoreTableBody.appendChild(row);
     });
 }
 
-// Call loadScores when the admin panel loads
-document.addEventListener("DOMContentLoaded", loadScores);
+// Load students and scores on page load
+document.addEventListener("DOMContentLoaded", function () {
+    displayStudents();
+    displayScores();
+});
